@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Junior Astronaut Mission Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="menu" class="overlay">
+  <div class="card">
+    <h1>🚀 Junior Astronaut<br>Mission Trainer</h1>
+    <p class="sub">Un juego multijugador estilo Among Us</p>
+    <input id="name" maxlength="16" placeholder="Tu nombre" autocomplete="off">
+    <button id="btnCreate" class="primary">Crear sala</button>
+    <div class="join-row">
+      <input id="code" maxlength="5" placeholder="Código" autocomplete="off">
+      <button id="btnJoin">Unirse</button>
+    </div>
+    <p id="menuErr" class="err"></p>
+  </div>
+</div>
+
+<div id="lobby" class="overlay hidden">
+  <div class="card">
+    <h2>🛰️ Sala de espera</h2>
+    <p class="sub">Código: <b id="roomCode"></b> <button id="btnCopy" class="mini">copiar</button></p>
+    <div id="lobbyList" class="players"></div>
+    <button id="btnStart" class="primary hidden">Iniciar partida</button>
+    <p class="sub">Mínimo 3 jugadores</p>
+    <button id="btnLeave" class="ghost">Salir</button>
+  </div>
+</div>
+
+<div id="hud" class="hidden">
+  <div id="hudTop">
+    <div id="hudRole"></div>
+    <div id="hudProgress"><div id="hudBar"></div><span id="hudBarText"></span></div>
+    <div id="hudCode"></div>
+  </div>
+  <div id="taskPanel"></div>
+  <div id="hint"></div>
+  <div id="toast" class="hidden"></div>
+</div>
+
+<div id="meeting" class="overlay hidden">
+  <div class="card">
+    <h2 id="meetingTitle"></h2>
+    <p id="meetingTimer" class="sub"></p>
+    <div id="voteList" class="players"></div>
+    <button id="voteConfirm" class="primary">Confirmar voto</button>
+    <p id="voteStatus" class="err"></p>
+    <p id="ejectedResult" class="sub"></p>
+  </div>
+</div>
+
+<div id="gameover" class="overlay hidden">
+  <div class="card">
+    <h2 id="goTitle"></h2>
+    <p id="goSub" class="sub"></p>
+    <button id="btnReload" class="primary">Jugar de nuevo</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
