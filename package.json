@@ -1,0 +1,11 @@
+{
+  "name": "junior-astronaut-mission-trainer",
+  "version": "1.0.0",
+  "description": "Juego multijugador estilo Among Us: astronautas junior completan misiones en una estacion espacial.",
+  "type": "module",
+  "scripts": {
+    "start": "bun server.ts",
+    "dev": "bun --watch server.ts"
+  },
+  "license": "MIT"
+}
