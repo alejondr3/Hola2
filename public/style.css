@@ -1,0 +1,149 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: #05060f;
+  color: #eaf2ff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+#game { display: block; }
+
+.hidden { display: none !important; }
+
+.overlay {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(3, 5, 14, 0.82);
+  z-index: 20;
+}
+
+.card {
+  width: min(92vw, 420px);
+  background: #0e1526;
+  border: 1px solid #26324d;
+  border-radius: 16px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+h1 { font-size: 1.7rem; line-height: 1.15; margin-bottom: 6px; }
+h2 { font-size: 1.25rem; margin-bottom: 10px; }
+.sub { color: #8fa2c4; font-size: 0.9rem; margin: 6px 0; }
+.err { color: #ff7b7b; font-size: 0.9rem; min-height: 1.1em; margin-top: 8px; }
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid #26324d;
+  background: #0a1020;
+  color: #eaf2ff;
+  font-size: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+}
+input::placeholder { color: #5a6b8c; text-transform: none; }
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #22304d;
+  transition: filter 0.12s ease, transform 0.05s ease;
+}
+button:hover { filter: brightness(1.12); }
+button:active { transform: translateY(1px); }
+button:disabled { opacity: 0.5; cursor: default; }
+
+.primary {
+  width: 100%;
+  margin: 8px 0;
+  background: linear-gradient(135deg, #3b6cff, #7a3bff);
+}
+.ghost { background: transparent; border: 1px solid #26324d; margin-top: 8px; }
+.mini { padding: 4px 10px; font-size: 0.8rem; background: #26324d; }
+
+.join-row { display: flex; gap: 8px; margin-top: 6px; }
+.join-row input { flex: 1; }
+.join-row button { flex: 0 0 auto; }
+
+.players {
+  display: flex; flex-direction: column; gap: 6px;
+  margin: 10px 0; max-height: 40vh; overflow-y: auto;
+}
+.player-row, .vote-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px;
+  background: #111a2e;
+  border: 1px solid #22304d;
+  border-radius: 10px;
+  color: #eaf2ff;
+  font-size: 0.95rem;
+  text-align: left;
+}
+.vote-card.sel { border-color: #7a3bff; background: #1a1530; }
+.vote-card .voted { margin-left: auto; color: #7dffa0; font-weight: 700; }
+
+.dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  flex: 0 0 auto; border: 2px solid rgba(255,255,255,0.25);
+}
+
+/* HUD */
+#hud { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
+#hudTop {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 14px;
+}
+#hudRole {
+  background: rgba(10, 16, 32, 0.8); border: 1px solid #26324d;
+  padding: 6px 12px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+}
+#hudProgress {
+  width: 320px; height: 16px;
+  background: rgba(10, 16, 32, 0.8); border: 1px solid #26324d;
+  border-radius: 10px; overflow: hidden; position: relative;
+}
+#hudBar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #3bff8a, #3bc9ff);
+  transition: width 0.3s ease;
+}
+#hudBarText {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #000;
+}
+#hudCode { background: rgba(10,16,32,.8); border: 1px solid #26324d; padding: 6px 12px; border-radius: 10px; font-size: .85rem; font-weight: 700; }
+
+#taskPanel {
+  position: absolute; left: 14px; bottom: 14px;
+  background: rgba(10, 16, 32, 0.82); border: 1px solid #26324d;
+  border-radius: 12px; padding: 12px 14px; max-width: 260px;
+}
+#taskPanel h4 { font-size: 0.8rem; margin-bottom: 6px; color: #8fa2c4; }
+#taskPanel .task { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; padding: 2px 0; }
+#taskPanel .task.done { color: #7dffa0; text-decoration: line-through; }
+
+#hint {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  background: rgba(10, 16, 32, 0.85); border: 1px solid #26324d;
+  padding: 8px 16px; border-radius: 12px; font-size: 0.9rem;
+  white-space: nowrap; max-width: 90vw; overflow: hidden; text-overflow: ellipsis;
+}
+#hint:empty { display: none; }
+
+#toast {
+  position: absolute; top: 18%; left: 50%; transform: translateX(-50%);
+  background: rgba(10, 16, 32, 0.92); border: 1px solid #7a3bff;
+  padding: 14px 22px; border-radius: 12px; font-size: 1.1rem; font-weight: 700;
+  text-align: center;
+}
